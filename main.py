@@ -14,7 +14,7 @@ def nombre_producto():
     except:
         os.system("cls")
         print("Ha ocurrido un error pero no te preocupes. Vuelve a intentarlo!")
-        nombre = nombre_producto()
+        return
 
 def id_proveedor_producto():
     os.system("cls")
@@ -30,7 +30,7 @@ def id_proveedor_producto():
     except:
         os.system("cls")
         print("Ha ocurrido un error pero no te preocupes. Vuelve a intentarlo!")
-        id_proveedor = id_proveedor_producto()
+        return
 
 def nombre_proveedor_producto():
     os.system("cls")
@@ -45,7 +45,7 @@ def nombre_proveedor_producto():
     except:
         os.system("cls")
         print("Ha ocurrido un error pero no te preocupes. Vuelve a intentarlo!")
-        nombre_proveedor = nombre_proveedor_producto()
+        return
 
 #! ----------------------------------------------- APARTADO INGRESAR PRODUCTO ------------------------------------
 
@@ -70,6 +70,8 @@ def automatizar_ingreso():
     os.system("cls")
     ingresar_producto(nombre, id_proveedor, nombre_proveedor)
 
+
+#! ----------------------------------------------- APARTADO VER CARRITO ------------------------------------
 def mostrar_carrito():
     for indice, producto in enumerate(carrito):
         print("")
@@ -78,6 +80,58 @@ def mostrar_carrito():
         print(f"Nombre: {producto['Nombre']}")
         print("- " *10)
 
+
+def mostrar_carrito_detallado():
+    producto = obtener_producto()
+    os.system("cls")
+    
+    try:
+        print("")
+        print("- " *10)
+        print(f"Nombre: {producto['Nombre']}")
+        print(f"ID Proveedor: {producto['Id_Proveedor']}")
+        print(f"Nombre Proveedor: {producto['Nombre_Proveedor']}")
+        print("- " *10)
+        
+    except:
+        print("Ha ocurrido un error pero no te preocupes. Vuelve a intentarlo!")
+        return
+    
+#! ----------------------------------------------- APARTADO OBTENER PRODUCTO ------------------------------------
+
+def obtener_producto():
+    indice = int(input("Ingrese el ID del producto a visualizar -->  "))
+    try:
+        if (indice <= 0 or indice >= len(carrito)):
+            os.system("cls")
+            print("Ingrese una ID valida...")
+            indice = mostrar_carrito_detallado()
+        
+        producto = carrito[indice]
+
+        return producto
+    
+    except:
+        print("Ha ocurrido un error pero no te preocupes. Vuelve a intentarlo!")
+        return
+        
+
+def buscar_producto():
+    
+    try:
+        nombre_producto = input("Ingrese el nombre del producto a buscar -->  ")
+        
+        for indice, producto in enumerate(carrito):
+            if (nombre_producto in producto['Nombre']):
+                print("")
+                print("- " *10)
+                print(f"ID: {indice + 1}")
+                print(f"Nombre: {producto['Nombre']}")
+                print("- " *10)
+    
+    except:
+        print("Ha ocurrido un error pero no te preocupes. Vuelve a intentarlo!")
+        return
 
 #! ----------------------------------------------- APARTADO MENU ------------------------------------
 def menu_supermercado():
@@ -110,6 +164,7 @@ def menu_supermercado():
 
         elif (opc == 3):
             print("Buscar producto")
+            buscar_producto()
 
         elif (opc == 4):
             print("Modificar carrito")
