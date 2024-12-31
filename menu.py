@@ -1,34 +1,45 @@
+import os, inputs as inp, menu, view, getproduct as get, searchproduct as search, modifyproduct as mod
 
-
-def menu_supermercado():
+def menu_supermercado(carrito):
     while True:
-        print("- " *24)
-        print("Bienvenido al Supermercado")
+        os.system("cls")
+        print("⭐ Bienvenido al Supermercado ⭐")
         print("Elija una de las siguientes opciones")
-        print("- " *24)
-        
-        print("")
 
         print("* " *24)
-        print("[1] Ingresar producto al carrito.")
-        print("[2] Mostrar productos ingresados")
-        print("[3] Buscar productos")
-        print("[4] Modificar carrito")
-        print("[0] Salir.")
+        print("[1] Ingresar producto al carrito. 🛒")
+        print("[2] Mostrar productos ingresados 👁️‍🗨️")
+        print("[3] Buscar productos 🔎")
+        print("[4] Modificar carrito 🔃")
+        print("[0] Salir. 👋")
         print("* " *24)
         opc = int(input(""))
 
         if (opc == 1):
-            print("Ingresar productos")
+            inp.automatizar_ingreso(carrito)
+            os.system("pause")
         
         elif (opc == 2):
-            print("Mostrar productos")
+            print("* " * 24)
+            view.mostrar_carrito(carrito)
+            print("")
+            print("* " * 24)
+            view.mostrar_carrito_detallado(carrito)
+            os.system("pause")
 
         elif (opc == 3):
-            print("Buscar producto")
+            search.menu_busqueda(carrito)
+            os.system("pause")
 
         elif (opc == 4):
-            print("Modificar carrito")
+            os.system("cls")
+            print("*** MENU PARA MODIFICAR ATRIBUTOS ***")
+            print("* " * 24)
+            view.mostrar_carrito(carrito)
+            print("")
+            print("* " * 24)
+            mod.modificar_producto(carrito)
+            os.system("pause")
         
         elif (opc == 0):
             break;
